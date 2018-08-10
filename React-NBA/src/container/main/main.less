@@ -10,5 +10,104 @@
         background-color: #1c90f2;
         line-height: 44/16rem;
         color: #FFF;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        .header-left-logo{
+            width:107/16rem;
+            height:100%;
+            border-right: 1px solid #066DC4;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+            img{
+                width: 1.5rem;
+                height:auto;
+                margin-left:0.5rem;
+            }
+            span{
+                margin:0 0.3rem;
+            }
+        }
+        .header-right-warp{
+            flex: 1;
+            width: 100%;
+            padding: 0 0.5rem;
+            display: flex;
+            flex-direction: row;
+            border-left:1px solid #61B2F6;
+            justify-content:space-between;
+            .login-and-menu{
+                display: flex;
+                flex-direction: row;
+                white-space: nowrap;
+                a{
+                    color: #fff;
+                }
+                .login-warp{
+                    margin-right: 1rem;
+                }
+                i{
+                    font-size:2rem;
+                }
+            }
+        }
     }
+    .menu-list{
+        width: 100%;
+        height:auto;
+        background-color: #eee;
+        border-bottom: 1px solid #ddd;
+        z-index:-1;
+        ul{
+            padding:0 0.8rem;
+            display: flex;
+            flex-direction: row;
+            justify-content:space-between;
+            flex-wrap: wrap;
+            li{
+                padding: 0.5rem 0.4rem;
+                color:#000;
+            }
+        }
+    }
+}
+
+.moveFromTop {
+    -webkit-animation: moveFromTop 0.5s ease both;
+    animation: moveFromTop 0.5s ease both;
+}
+@-webkit-keyframes moveFromTop {
+    from { -webkit-transform: translateY(-100%); opacity: 0}
+    to{opacity: 1}
+}
+@keyframes moveFromTop {
+    from { -webkit-transform: translateY(-100%); transform: translateY(-100%); opacity: 0}
+    to{opacity: 1}
+}
+.rotateTo {
+    -webkit-animation: rotateTo 0.5s ease both;
+    animation: rotateTo 0.5s ease both;
+}
+@-webkit-keyframes rotateTo {
+    from { -webkit-transform: rotate(0deg)}
+    to{ -webkit-transform: rotate(90deg)}
+}
+@keyframes rotateTo {
+    from { transform: rotate(0deg)}
+    to{ transform: rotate(90deg)}
+}
+
+.rotateBack {
+    -webkit-animation: rotateBack 0.5s ease both;
+    animation: rotateBack 0.5s ease both;
+}
+@-webkit-keyframes rotateBack {
+    from { -webkit-transform: rotate(90deg)}
+    to{ -webkit-transform: rotate(0deg)}
+}
+@keyframes rotateBack {
+    from { transform: rotate(90deg)}
+    to{ transform: rotate(0deg)}
 }
