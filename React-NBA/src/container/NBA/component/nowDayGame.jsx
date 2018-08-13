@@ -8,10 +8,6 @@ class NowDayGame extends Component{
         super(props);
     }
     componentDidMount(){
-        console.log(this.props.nowDayInfo); 
-    }
-    componentWillReceiveProps(){
-        console.log(this.props.nowDayInfo);
     }
     render(){
         let dataString = this.props.nowDayInfo[0].startTime.slice(5,7)+'月'+this.props.nowDayInfo[0].startTime.slice(8,10)+'日';

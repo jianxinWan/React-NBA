@@ -5,11 +5,24 @@ class Index extends Component{
     constructor(props){
         super(props);
         this.showMenu = this.showMenu.bind(this);
+        this.setPages = this.setPages.bind(this);
         this.state = {
             nowPage:'NBA',
             loginState:false,
             showMenuList:false
         }
+    }
+    setPages(e){
+        const promise  = new Promise((reslove,reject)=>{
+            this.setState({
+                nowPage:e.target.innerHTML
+            })
+            reslove();
+        }).then(()=>{
+            this.showMenu();
+        }).catch((err)=>{
+            console.log(err);
+        })
     }
     showMenu(){
         this.setState({
@@ -27,18 +40,83 @@ class Index extends Component{
                 </NavLink>
             )
         }
-        let menuList = null;
+        let menuList = null,moduleFun;
         if(this.state.showMenuList){
             menuList = (
-                <ul>
-                    <li>NBA</li>
-                    <li>CBA</li>
-                    <li>电竞</li>
-                    <li>英超</li>
-                    <li>社区</li>
-                    <li>更多</li>
+                <ul onClick={this.setPages} className="nav1">
+                    <NavLink to="/home/nba">
+                        <li>NBA</li>
+                    </NavLink>
+                    <NavLink to="/home/cba">
+                        <li>CBA</li>
+                    </NavLink>
+                    <NavLink to="/home/esports">
+                        <li>电竞</li>
+                    </NavLink>
+                    <NavLink to="/home/soccer">
+                        <li>英超</li>
+                    </NavLink>
+                    <NavLink to="/home/community">
+                        <li>社区</li>
+                    </NavLink>
+                    <NavLink to="/home/more">
+                        <li>更多</li>
+                    </NavLink>
                 </ul>
             )
+        }
+        let navGroup2 = null;
+        switch(this.state.nowPage){
+            case 'NBA':
+                navGroup2 = (
+                    <ul className="nav2">
+                        <NavLink to="/home/nba/game" activeClassName="activeLi">
+                            <li>赛程</li>
+                        </NavLink>
+                        <NavLink to="/home/nba/team" activeClassName="activeLi">
+                            <li>球队榜</li>
+                        </NavLink>
+                        <NavLink to="/home/nba/player" activeClassName="activeLi">
+                            <li>球员榜</li>
+                        </NavLink>
+                    </ul>
+                )
+                break;
+            case 'CBA':
+                navGroup2 = (
+                    <ul className="nav2">
+                        <NavLink activeClassName="activeLi">
+                            <li>赛程</li>
+                        </NavLink>
+                        <NavLink activeClassName="activeLi">
+                            <li>球队榜</li>
+                        </NavLink>
+                        <NavLink activeClassName="activeLi">
+                            <li>球员榜</li>
+                        </NavLink>
+                    </ul>
+                )
+                break;
+            case '英超':
+                navGroup2 = (
+                    <ul className="nav2 nav2-soccer">
+                        <NavLink activeClassName="activeLi">
+                            <li>赛程</li>
+                        </NavLink>
+                        <NavLink activeClassName="activeLi">
+                            <li>积分榜</li>
+                        </NavLink>
+                        <NavLink activeClassName="activeLi">
+                            <li>射手榜</li>
+                        </NavLink>
+                        <NavLink activeClassName="activeLi">
+                            <li>助攻榜</li>
+                        </NavLink>
+                    </ul>
+                )
+                break;
+            default:
+                break;
         }
         return(
             <div className="main-warp">
@@ -62,8 +140,11 @@ class Index extends Component{
                 </div>
                 <div  className={['menu-list',this.state.showMenuList?'moveFromTop':' '].join(" ")}>
                     {menuList}
+                    {navGroup2}
                 </div>
-                {this.props.children}
+                <div className="main-content">
+                    {this.props.children}
+                </div>
             </div>
         )
     }

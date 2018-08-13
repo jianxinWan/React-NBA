@@ -13,7 +13,7 @@ class NBA extends Component{
         })
     }
     getGameList(){
-        $.getJSON("http://matchweb.sports.qq.com/kbs/list?columnId=100000&startTime=2018-07-14&endTime=2018-08-04&_=1533819150895&callback=?", (res)=> {
+        $.getJSON("http://matchweb.sports.qq.com/kbs/list?columnId=100000&startTime=2018-07-14&endTime=2018-10-20&_=1533819150895&callback=?", (res)=> {
             this.setState({
                 gameInfo:res.data,
                 getInfoFinished:true

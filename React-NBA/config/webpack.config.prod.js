@@ -166,7 +166,7 @@ module.exports = {
           // use the "style" loader inside the async code so CSS from them won't be
           // in the main CSS file.
           {
-            test: /\.css$/,
+            test: /\.(css|less)$/,
             loader: ExtractTextPlugin.extract(
               Object.assign(
                 {
@@ -178,6 +178,7 @@ module.exports = {
                   },
                   use: [
                     {
+                      // loader: require.resolve('css-loader'),
                       loader: require.resolve('css-loader'),
                       options: {
                         importLoaders: 1,
@@ -205,6 +206,9 @@ module.exports = {
                         ],
                       },
                     },
+                    {
+                      loader: require.resolve('less-loader') // compiles Less to CSS
+                    }
                   ],
                 },
                 extractTextPluginOptions
@@ -222,7 +226,7 @@ module.exports = {
             // it's runtime that would otherwise processed through "file" loader.
             // Also exclude `html` and `json` extensions so they get processed
             // by webpacks internal loaders.
-            exclude: [/\.(js|jsx|mjs)$/, /\.html$/, /\.json$/],
+            exclude: [/\.(js|jsx|mjs)$/, /\.html$/, /\.json$/,/\.(css|less)$/],
             options: {
               name: 'static/media/[name].[hash:8].[ext]',
             },
