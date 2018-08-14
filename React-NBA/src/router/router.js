@@ -18,8 +18,8 @@ import CBA from '../container/CBA/cba';
 import Esports from '../container/esports/esport';
 import Soccer from '../container/Soccer/soccer';
 import Community from '../container/Community/community';
-
-
+import Team from '../container/NBA/team/team';
+import Player from '../container/NBA/player/player';
 const store = configureStore();
 const router = (
     <Router>
@@ -32,9 +32,11 @@ const router = (
                             <Switch>
                                 <Route replace path="/home/nba" component={NBA} />
                                 <Route replace path="/home/cba" component={CBA} />
+                                <Route replace path="/home/nbaTeam" component={Team} />
                                 <Route replace path="/home/esports" component={Esports} />
                                 <Route replace path="/home/soccer" component={Soccer} />
                                 <Route replace path="/home/community" component={Community} />
+                                <Route replace path="/home/nbaPlayer" component={Player} />
                                 <Redirect to="/home/nba" />
                             </Switch>
                         </Main>

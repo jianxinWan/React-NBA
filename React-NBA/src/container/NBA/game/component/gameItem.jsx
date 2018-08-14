@@ -13,13 +13,10 @@ class GameItem extends Component{
     render(){
         const gameInfo = this.props.itemInfo;
         const startTime = this.props.itemInfo.startTime.slice(11,16);
-        let startMonth = this.props.itemInfo.startTime.slice(5,7);
-        let startDay = this.props.itemInfo.startTime.slice(8,10);
-        let todyDate = new Date();
-        let month = todyDate.getMonth()+1;
-        let tody  = todyDate.getDate();
+        let itemDate = new Date(gameInfo.startTime).getTime();
+        let todyDate = new Date().getTime();
         let scoreWarp = null;
-        if(startMonth<month){
+        if(itemDate<todyDate){
             scoreWarp = (
                 <div className="game-status">
                     <p>
@@ -34,34 +31,18 @@ class GameItem extends Component{
                 </div>
             )
         }else{
-            if(tody<startDay){
-                scoreWarp = (
-                    <div className="game-status">
-                        <div className="live-type">
-                            <i className="iconfont icon-iconfontshipin"></i>
-                            <span>视频直播</span>
-                        </div>
-                        <div className="order-btn">
-                            <i className="iconfont icon-naozhong"></i>
-                            <span>预约</span>
-                        </div>
+            scoreWarp = (
+                <div className="game-status">
+                    <div className="live-type">
+                        <i className="iconfont icon-iconfontshipin"></i>
+                        <span>视频直播</span>
                     </div>
-                )
-            }else{
-                scoreWarp = (
-                    <div className="game-status">
-                        <p>
-                            <span>{gameInfo.leftGoal}</span>
-                            :
-                            <span>{gameInfo.rightGoal}</span>
-                        </p>
-                        <div className="game-icon">
-                            <i className="iconfont icon-iconfontshipin"></i>
-                            <span>集锦</span>
-                        </div>
+                    <div className="order-btn">
+                        <i className="iconfont icon-naozhong"></i>
+                        <span>预约</span>
                     </div>
-                )
-            }
+                </div>
+            )
         }
         return (
             <div className="game-item">

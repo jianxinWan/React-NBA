@@ -70,13 +70,13 @@ class Index extends Component{
             case 'NBA':
                 navGroup2 = (
                     <ul className="nav2">
-                        <NavLink to="/home/nba/game" activeClassName="activeLi">
+                        <NavLink to="/home/nba" activeClassName="activeLi">
                             <li>赛程</li>
                         </NavLink>
-                        <NavLink to="/home/nba/team" activeClassName="activeLi">
+                        <NavLink to="/home/nbaTeam" activeClassName="activeLi">
                             <li>球队榜</li>
                         </NavLink>
-                        <NavLink to="/home/nba/player" activeClassName="activeLi">
+                        <NavLink to="/home/nbaPlayer" activeClassName="activeLi">
                             <li>球员榜</li>
                         </NavLink>
                     </ul>
