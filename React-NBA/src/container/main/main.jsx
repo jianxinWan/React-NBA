@@ -9,7 +9,8 @@ class Index extends Component{
         this.state = {
             nowPage:'NBA',
             loginState:false,
-            showMenuList:false
+            showMenuList:false,
+            showHead:true
         }
     }
     setPages(e){
@@ -28,6 +29,71 @@ class Index extends Component{
         this.setState({
             showMenuList:this.state.showMenuList?false:true
         })
+    }
+
+      //add 滑动判断
+    getSlideAngle(dx,dy){
+        //计算角度
+        return Math.atan2(dy,dx)*180/Math.PI;
+    }
+    getSlideDirection(sx,sy,ex,ey){
+        let dy = ey-sy;
+        let dx = ex-sx;
+        let result = 0;
+        if(Math.abs(dx) < 2 && Math.abs(dy) < 2){
+            return result;
+        }
+        let angle = this.getSlideAngle(dx,dy);
+        if(angle >= -45 && angle < 45) { 
+            result = 4; 
+        }else if (angle >= 45 && angle < 135) { 
+            result = 1; 
+        }else if (angle >= -135 && angle < -45) { 
+            result = 2; 
+        } 
+        else if ((angle >= 135 && angle <= 180) || (angle >= -180 && angle < -135)) { 
+            result = 3; 
+        } 
+        return result; 
+    }
+    addTouch(){
+        let sx,sy;
+        let that = this;
+        document.addEventListener('touchstart',(e)=>{
+            sx = e.changedTouches[0].pageX;
+            sy = e.changedTouches[0].pageY;
+        },false);
+        document.addEventListener('touchend',(e)=>{
+            let ex,ey;
+            ex = e.changedTouches[0].pageX;
+            ey = e.changedTouches[0].pageY;
+            let direction = this.getSlideDirection(sx,sy,ex,ey);
+            switch(direction) { 
+                case 0: 
+                    break; 
+                case 1: 
+                    this.setState({
+                        showHead:true
+                    })
+                    //展示
+                    break; 
+                case 2:
+                    //收起 
+                    this.setState({
+                        showHead:false
+                    }) 
+                    break; 
+                case 3: 
+                    break; 
+                case 4: 
+                    break; 
+                default:
+                    break;            
+            } 
+        })
+    }
+    componentDidMount(){
+        this.addTouch();
     }
     render(){
         let loginWarp = null;
@@ -120,27 +186,29 @@ class Index extends Component{
         }
         return(
             <div className="main-warp">
-                <div className="main-header-warp">
-                    <div className="header-left-logo">
-                        <img src="http://mat1.gtimg.com/sports/sportAppWeb/kbsshare/statics/icon-logo40x40_6cc48e.png" alt="top-logo" />
-                        <span>腾讯体育</span>
-                    </div>
-                    <div className="header-right-warp">
-                        <div className="shwo-page-warp">
-                            {this.state.nowPage}
+                <div className={['header',this.state.showHead?'moveFromTop':'backTop'].join(" ")}>
+                    <div className = {['main-header-warp'].join(" ")} >
+                        <div className="header-left-logo">
+                            <img src="http://mat1.gtimg.com/sports/sportAppWeb/kbsshare/statics/icon-logo40x40_6cc48e.png" alt="top-logo" />
+                            <span>腾讯体育</span>
                         </div>
-                        <div className="login-and-menu">
-                            <div className="login-warp">
-                                {loginWarp}
+                        <div className="header-right-warp">
+                            <div className="shwo-page-warp">
+                                {this.state.nowPage}
                             </div>
-                            <i className={['iconfont','icon-caidan-copy',this.state.showMenuList?'rotateTo':'rotateBack'].join(" ")}  onClick={this.showMenu} >
-                            </i>
+                            <div className="login-and-menu">
+                                <div className="login-warp">
+                                    {loginWarp}
+                                </div>
+                                <i className={['iconfont','icon-caidan-copy',this.state.showMenuList?'rotateTo':'rotateBack'].join(" ")}  onClick={this.showMenu} >
+                                </i>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div  className={['menu-list',this.state.showMenuList?'moveFromTop':' '].join(" ")}>
-                    {menuList}
-                    {navGroup2}
+                    <div  className={['menu-list',this.state.showMenuList?'moveFromTop':' '].join(" ")}>
+                        {menuList}
+                        {navGroup2}
+                    </div>
                 </div>
                 <div className="main-content">
                     {this.props.children}
