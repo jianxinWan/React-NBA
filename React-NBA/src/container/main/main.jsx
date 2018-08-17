@@ -14,6 +14,7 @@ class Index extends Component{
         }
     }
     setPages(e){
+        console.log(e);
         const promise  = new Promise((reslove,reject)=>{
             this.setState({
                 nowPage:e.target.innerHTML

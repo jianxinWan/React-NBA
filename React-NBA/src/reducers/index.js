@@ -2,6 +2,8 @@ import {
     SET_NOWPAGE,
     GET_NOWPAGE
 } from '../actions/index';
+
+
 function nowPage(nowPage = "",action){
     switch(action.type){
         case SET_NOWPAGE:

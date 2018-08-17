@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-
+import {NavLink} from 'react-router-dom';
 import './playerCount.less';
 
 class PlayerCount extends Component{
@@ -18,12 +18,14 @@ class PlayerCount extends Component{
                 )
             });
             body = playerInfo.rank[0].rows.map((item,index)=>{
-                return (
+                return ( 
                     <tr key={index}>
                         <th>
-                            <div style={{backgroundColor:item.config.color==='0'?'red':'#fff',color:item.config.color==='0'?'#fff':'#000'}}>{index+1}</div>
-                            <img src={item.config.icon} />
-                            {item.config.name}
+                            <NavLink to={`/home/playerDetail/${item.config.id}`} >
+                                <div style={{backgroundColor:item.config.color==='0'?'red':'#fff',color:item.config.color==='0'?'#fff':'#000'}}>{index+1}</div>
+                                <img src={item.config.icon} />
+                                {item.config.name}
+                            </NavLink>
                         </th>
                         <th>{item.data.team}</th>
                         <th>{item.data.value}</th>                   
