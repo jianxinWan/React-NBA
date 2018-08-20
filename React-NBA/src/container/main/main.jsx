@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {NavLink} from 'react-router-dom'
+import {NavLink} from 'react-router-dom';
 import './main.less';
 class Index extends Component{
     constructor(props){
@@ -7,18 +7,14 @@ class Index extends Component{
         this.showMenu = this.showMenu.bind(this);
         this.setPages = this.setPages.bind(this);
         this.state = {
-            nowPage:'NBA',
             loginState:false,
             showMenuList:false,
             showHead:true
         }
     }
     setPages(e){
-        console.log(e);
         const promise  = new Promise((reslove,reject)=>{
-            this.setState({
-                nowPage:e.target.innerHTML
-            })
+            this.props.setNowPage(e.target.innerHTML);
             reslove();
         }).then(()=>{
             this.showMenu();
@@ -94,6 +90,9 @@ class Index extends Component{
         })
     }
     componentDidMount(){
+        this.setState({
+            nowPage:this.props.nowPage
+        }) 
         this.addTouch();
     }
     render(){
@@ -133,7 +132,7 @@ class Index extends Component{
             )
         }
         let navGroup2 = null;
-        switch(this.state.nowPage){
+        switch(this.props.nowPage){
             case 'NBA':
                 navGroup2 = (
                     <ul className="nav2">
@@ -195,7 +194,7 @@ class Index extends Component{
                         </div>
                         <div className="header-right-warp">
                             <div className="shwo-page-warp">
-                                {this.state.nowPage}
+                                {this.props.nowPage}
                             </div>
                             <div className="login-and-menu">
                                 <div className="login-warp">

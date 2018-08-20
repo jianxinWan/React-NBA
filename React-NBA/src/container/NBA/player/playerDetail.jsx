@@ -1,13 +1,23 @@
 import  React,{Component} from 'react';
-import './playerCount.less';
+import $ from 'jquery';
 
+
+import PlayerCard from  './components/playerCard';
+import SelectTable from './components/selectTable';
+import './playerCount.less';
 class PlayerDetail extends Component{
     constructor(props){
         super(props);
     }
+    componentDidMount(){
+        console.log(this.props.match.params.playerId);
+    }
     render(){
         return (
-            <div>我是球员详情页面</div>
+            <React.Fragment>
+                <PlayerCard playerId={this.props.match.params.playerId}></PlayerCard>
+                <SelectTable playerId={this.props.match.params.playerId}></SelectTable>
+            </React.Fragment>
         )
     }
 }

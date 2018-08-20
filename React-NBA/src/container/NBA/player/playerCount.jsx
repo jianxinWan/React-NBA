@@ -2,14 +2,16 @@ import React,{Component} from 'react';
 import {NavLink} from 'react-router-dom';
 import './playerCount.less';
 
+import {connect} from 'react-redux';
+import {setPageInfo} from '../../../actions/index';
+
+
 class PlayerCount extends Component{
-    constructor(props){
-        super(props);
-    }
     componentDidMount(){
     }
     render(){
         const playerInfo = this.props.playerInfo;
+        const {setNowPage}  = this.props;
         let head,body = null
         if(playerInfo){
             head = playerInfo.rank[0].head.map((item)=>{
@@ -20,7 +22,7 @@ class PlayerCount extends Component{
             body = playerInfo.rank[0].rows.map((item,index)=>{
                 return ( 
                     <tr key={index}>
-                        <th>
+                        <th  onClick={setNowPage}>
                             <NavLink to={`/home/playerDetail/${item.config.id}`} >
                                 <div style={{backgroundColor:item.config.color==='0'?'red':'#fff',color:item.config.color==='0'?'#fff':'#000'}}>{index+1}</div>
                                 <img src={item.config.icon} />
@@ -48,5 +50,15 @@ class PlayerCount extends Component{
         )
     }
 }
+let mapState = (state) =>{
+    return state;
+}
+let mapDispatch = (dispatch)=>{
+    return {
+        setNowPage:() => dispatch(
+            setPageInfo('Player')
+        )
+    }
+}
 
-export default PlayerCount;
+export default connect(mapState,mapDispatch)(PlayerCount);

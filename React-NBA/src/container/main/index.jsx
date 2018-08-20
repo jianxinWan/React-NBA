@@ -1,31 +1,34 @@
 import React,{Component} from 'react';
 import {connect} from 'react-redux';
 
+import {
+    setPageInfo
+} from '../../actions/index';
 import Main from  './main';
 class Index extends Component{
     constructor(props){
         super(props);
     }
+    componentDidMount(){
+        
+    }
     render(){
+        const {nowPage,setNowPage} = this.props;
         return (
-            <div>
-                <Main></Main>
-            </div>
+            <Main setNowPage={setNowPage} nowPage={nowPage}>
+                {this.props.children}
+            </Main>
         )
     }
 }
-function mapState(state) {
-    console.log(state);
-    return { nowPage: state.nowPage }
+let mapState = (state) => {
+    return state;
 }
-  
-function mapDispatch(dispatch) {
+let mapDispatch = (dispatch) =>{
     return {
-        setNowPage:()=>{
-            dispatch(
-                
-            )
-        }
+        setNowPage:(...args) => dispatch(
+            setPageInfo(...args)
+        )
     }
 }
-export default Index;
+export default connect(mapState,mapDispatch)(Index);
