@@ -32,15 +32,16 @@ class SelectTable extends Component{
     }
     showComponet(){
         let component = null;
+        console.log(this.props.playerId);
         switch(this.state.nowNav){
             case '数据':
-                component = (<PlayerData />)
+                component = (<PlayerData playerId={this.props.playerId} />)
                 break;
             case '资料':
-                component = (<PlayerDatum />)
+                component = (<PlayerDatum playerId={this.props.playerId} />)
                 break;
             default:
-                component = (<PlayerData />)
+                component = (<PlayerData playerId={this.props.playerId} />)
                 break;
         }
         return component;
