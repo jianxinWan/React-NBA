@@ -9,9 +9,6 @@ class PlayerDetail extends Component{
     constructor(props){
         super(props);
     }
-    componentDidMount(){
-        console.log(this.props.match.params.playerId);
-    }
     render(){
         return (
             <React.Fragment>

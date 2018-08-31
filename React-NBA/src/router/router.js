@@ -19,6 +19,7 @@ import Esports from '../container/esports/esport';
 import Soccer from '../container/Soccer/soccer';
 import Community from '../container/Community/community';
 import Team from '../container/NBA/team/team';
+import TeamDetail from '../container/NBA/team/teamDetail';
 import Player from '../container/NBA/player/player';
 import PlayerDetail from '../container/NBA/player/playerDetail';
 
@@ -40,6 +41,7 @@ const router = (
                                 <Route  path="/home/community" component={Community} />
                                 <Route  path="/home/nbaPlayer" component={Player} />
                                 <Route path="/home/PlayerDetail/:playerId" component={PlayerDetail} />
+                                <Route path="/home/teamDetail/:teamId" component={TeamDetail} />
                                 <Redirect to="/home/nba" />
                             </Switch>
                         </Index>
