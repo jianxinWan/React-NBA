@@ -25,9 +25,16 @@ class TeamDetail extends Component{
         let topCard  = null;
         const baseInfo  = this.state.teamBaseInfo.baseInfo;
         if(this.state.getInfoFinished){
+            console.log(baseInfo);
             topCard = (
                 <div className="top-card">
                     <img src={baseInfo.logo} />
+                    <div className="team-base-info">
+                        <h3>{baseInfo.cnName}</h3>
+                        <p>NBA东部联盟第{baseInfo.hasUrl}名</p>
+                        <p>主教练:{baseInfo.coach}</p>
+                        <p>主场管:{baseInfo.venue}</p>
+                    </div>
                 </div>
             )
         }
