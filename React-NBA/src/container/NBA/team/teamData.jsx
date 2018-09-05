@@ -10,7 +10,7 @@ class TeamData extends Component{
     render(){
         return (
             <div>
-                我是球队基本信息
+                我是球队赛程
             </div>
         )
     }

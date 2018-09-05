@@ -1,4 +1,9 @@
 import React,{Component} from 'react';
+
+import {connect} from 'react-redux';
+import {setPageInfo} from '../../actions/index';
+
+
 import $ from 'jquery';
 import './nba.less';
 import NowDayGame from './game/component/nowDayGame';
@@ -25,10 +30,24 @@ class NBA extends Component{
             this.reachTheBottom();
         } 
     }
+    getDate(date){
+        const dateObj = new Date(date);
+        return dateObj.getFullYear()+'-'+(dateObj.getMonth()+1)+'-'+dateObj.getDate();
+    }
     setInitDate(){
-        this.setState({
-            
-        })
+        let mydata = new Date();
+        const month = new Date().getMonth();
+        if(month===6 ||month === 7||month===8){
+            this.setState({
+                ST:"2018-08-04",
+                EN:"2018-10-01"
+            })
+        }else{
+            this.setState({
+                ST:this.getDate(mydata.setDate(mydata.getDate()-2)),
+                EN:this.getDate(mydata.setDate(mydata.getDate()+2))
+            })
+        }
     }
     getDateStr(dateStr,day,type){
         //1代表向前，0代表向后
@@ -37,12 +56,11 @@ class NBA extends Component{
         let newStartDate,newStartStr;
         if(type===1){
             newStartDate = new Date(formatTimeS-day*24*60*60*1000);
-            if(newStartDate.getMonth()===8){
-                console.log("1111");
+            if(newStartDate.getMonth()===8 || newStartDate.getMonth()===7){
                 this.setState({
-                    ST:'2018-08-04'
+                    ST:'2018-07-18'
                 })
-                return '2018-08-04';
+                return '2018-07-18';
             }
             newStartStr = newStartDate.getFullYear()+'-'+(newStartDate.getMonth()+1)+ '-' +newStartDate.getDate();
             this.setState({
@@ -87,7 +105,9 @@ class NBA extends Component{
         });
     }
     getGameList(){
-        $.getJSON("http://matchweb.sports.qq.com/kbs/list?columnId=100000&startTime=2018-07-16&endTime=2018-08-04&_=1533819150895&callback=?", (res)=> {
+        const {setNowPage}  = this.props;
+        $.getJSON("http://matchweb.sports.qq.com/kbs/list?columnId=100000&startTime="+ this.state.ST+"&endTime="+ this.state.EN+"&_=1533819150895&callback=?", (res)=> {
+            setNowPage();
             this.setState({
                 gameInfo:res.data,
                 getInfoFinished:true
@@ -95,10 +115,17 @@ class NBA extends Component{
         });
     }
     componentDidMount(){
-        this.getGameList();
         window.onscroll = ()=>{
             this.isTopOrBottom(); 
         }
+        const promise = new Promise((resolve,reject)=>{
+            this.setInitDate();
+            resolve();
+        }).then(()=>{
+            this.getGameList();
+        }).catch((err)=>{
+            console.log(err);
+        })
     }
     render(){
         let  gameList = [];
@@ -120,4 +147,14 @@ class NBA extends Component{
         )
     }
 }
-export default NBA;
+const mapState = (state)=>{
+    return state;
+}
+const mapDispatch = (dispatch)=>{
+    return {
+        setNowPage:()=>dispatch(
+            setPageInfo('NBA')
+        )
+    }
+}
+export default connect(mapState,mapDispatch)(NBA);

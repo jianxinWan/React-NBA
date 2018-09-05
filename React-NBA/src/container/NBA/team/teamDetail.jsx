@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import $ from 'jquery';
-
+import {connect} from 'react-redux';
+import {setPageInfo} from '../../../actions/index';
 import SelectTable from './selectTable';
 import './teamDetail.less';
 class TeamDetail extends Component{
@@ -12,10 +13,12 @@ class TeamDetail extends Component{
         })
     }
     getTeamInfo(){
+        const {setNowPage}  = this.props;
         const url = 'http://matchweb.sports.qq.com/team/baseInfo?teamId='
         + this.props.match.params.teamId +
         '&competitionId=100000&from=h5&_=1535617381819&callback=?';
         $.getJSON(url,(res)=>{
+            setNowPage();
             this.setState({
                 teamBaseInfo:res.data,
                 getInfoFinished:true
@@ -52,4 +55,14 @@ class TeamDetail extends Component{
     }
 }
 
-export default TeamDetail;
+const mapState = (state)=>{
+    return state;
+}
+const dispatchState = (dispatch)=>{
+    return {
+        setNowPage:()=>dispatch(
+            setPageInfo('Team')
+        )
+    }
+}
+export default connect(mapState,dispatchState)(TeamDetail);

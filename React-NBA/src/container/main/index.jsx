@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {
     setPageInfo
 } from '../../actions/index';
+
 import Main from  './main';
 class Index extends Component{
     constructor(props){

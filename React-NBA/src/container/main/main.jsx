@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import {NavLink} from 'react-router-dom';
 import './main.less';
+
 class Index extends Component{
     constructor(props){
         super(props);
@@ -151,35 +152,35 @@ class Index extends Component{
             case 'CBA':
                 navGroup2 = (
                     <ul className="nav2">
-                        <NavLink activeClassName="activeLi">
+                        <NavLink activeClassName="activeLi" to="/home/nba">
                             <li>赛程</li>
                         </NavLink>
-                        <NavLink activeClassName="activeLi">
+                        <NavLink activeClassName="activeLi" to="/home/nbaTeam">
                             <li>球队榜</li>
                         </NavLink>
-                        <NavLink activeClassName="activeLi">
+                        <NavLink activeClassName="activeLi" to="/home/nbaPlayer">
                             <li>球员榜</li>
                         </NavLink>
                     </ul>
                 )
                 break;
             case '英超':
-                navGroup2 = (
-                    <ul className="nav2 nav2-soccer">
-                        <NavLink activeClassName="activeLi">
-                            <li>赛程</li>
-                        </NavLink>
-                        <NavLink activeClassName="activeLi">
-                            <li>积分榜</li>
-                        </NavLink>
-                        <NavLink activeClassName="activeLi">
-                            <li>射手榜</li>
-                        </NavLink>
-                        <NavLink activeClassName="activeLi">
-                            <li>助攻榜</li>
-                        </NavLink>
-                    </ul>
-                )
+                // navGroup2 = (
+                //     <ul className="nav2 nav2-soccer">
+                //         <NavLink activeClassName="activeLi">
+                //             <li>赛程</li>
+                //         </NavLink>
+                //         <NavLink activeClassName="activeLi">
+                //             <li>积分榜</li>
+                //         </NavLink>
+                //         <NavLink activeClassName="activeLi">
+                //             <li>射手榜</li>
+                //         </NavLink>
+                //         <NavLink activeClassName="activeLi">
+                //             <li>助攻榜</li>
+                //         </NavLink>
+                //     </ul>
+                // )
                 break;
             default:
                 break;
@@ -190,7 +191,7 @@ class Index extends Component{
                     <div className = {['main-header-warp'].join(" ")} >
                         <div className="header-left-logo">
                             <img src="http://mat1.gtimg.com/sports/sportAppWeb/kbsshare/statics/icon-logo40x40_6cc48e.png" alt="top-logo" />
-                            <span>腾讯体育</span>
+                            <span>今日赛事</span>
                         </div>
                         <div className="header-right-warp">
                             <div className="shwo-page-warp">

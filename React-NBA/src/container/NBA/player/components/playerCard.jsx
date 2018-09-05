@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import $ from 'jquery';
-
+import {connect} from 'react-redux';
+import {setPageInfo} from '../../../../actions/index';
 import './playerCard.less';
 
 class PlayerCard extends Component{
@@ -12,8 +13,10 @@ class PlayerCard extends Component{
         }
     }
     getPlaerCardInfo(){
+        const {setNowPage}  = this.props;
         const url="http://matchweb.sports.qq.com/player/baseInfo?playerId="+ this.props.playerId +"&from=h5&_=1534582161888&callback=?";
         $.getJSON(url,(res)=>{
+            setNowPage();
             this.setState({
                 getInfoFinished:true,
                 playerCardInfo:res.data
@@ -51,4 +54,14 @@ class PlayerCard extends Component{
     }
 }
 
-export default PlayerCard;
+const mapState = (state)=>{
+    return state;
+}
+const dispatchState = (dispatch)=>{
+    return {
+        setNowPage:()=>dispatch(
+            setPageInfo('Player')
+        )  
+    }   
+}
+export default connect(mapState,dispatchState)(PlayerCard);

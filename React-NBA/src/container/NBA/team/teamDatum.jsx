@@ -91,7 +91,7 @@ class TeamDatum extends Component{
                                 <th width="18%">号码</th>
                                 <th width="37%">名字</th>
                                 <th width="26%">位置</th>
-                                <th width="19%" class="salary-head">薪资(万$)</th>
+                                <th width="19%">薪资(万$)</th>
                             </tr>
                         </thead>
                         <tbody>

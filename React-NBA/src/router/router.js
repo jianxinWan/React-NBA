@@ -30,7 +30,7 @@ const router = (
             <App>
                 <Switch>
                     <Route exact path="/" render={()=>(<Redirect to="/home" />)} />
-                    <Route path="/home"render={()=> 
+                    <Route path="/home" render={()=> 
                         <Index>
                             <Switch>
                                 <Route  path="/home/nba" component={NBA} />
@@ -45,8 +45,7 @@ const router = (
                                 <Redirect to="/home/nba" />
                             </Switch>
                         </Index>
-                    }>
-                    </Route>
+                    } />
                     <Route path="/game/:mid" render={(props)=>
                         <Game {...props} />
                     } />
