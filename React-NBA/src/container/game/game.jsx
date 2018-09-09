@@ -2,6 +2,8 @@ import React,{Component} from 'react';
 import $ from 'jquery';
 import {NavLink} from 'react-router-dom';
 import './style/game.less';
+
+import Video from './component/video';
 class Game extends Component{
     constructor(props){
         super(props);
@@ -13,6 +15,7 @@ class Game extends Component{
     getGameInfo(){
         let url="http://matchweb.sports.qq.com/html/matchStatV37?mid="+this.props.match.params.mid+"&callback=?";
         $.getJSON(url,(res)=>{
+            console.log(res);
             this.setState({
                 gameInfo:res[1],
                 getInfoFinished:true
@@ -26,6 +29,7 @@ class Game extends Component{
     render(){
         const gameInfo = this.state.gameInfo;
         let title = null;
+        let videoWarp = null;
         if(this.state.getInfoFinished){
             title = ( 
                 <p className="game-title">
@@ -37,10 +41,14 @@ class Game extends Component{
                     <span>{gameInfo.teamInfo.rightName}</span>
                 </p>
             )
+            videoWarp = (
+                <Video vid = {gameInfo.stats[0].list[0].vid}></Video>
+            )
         }
         return (
             <div className="game-warp">
                 {title}
+                {videoWarp}
             </div>
         )
     }

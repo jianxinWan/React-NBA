@@ -15,8 +15,8 @@ class NBA extends Component{
         this.state = ({
             getInfoFinished:false,
             gameInfo:{},
-            ST:"2018-07-16",
-            EN:"2018-08-04"
+            ST:"",
+            EN:""
         })
     }
     isTopOrBottom(){
@@ -39,7 +39,7 @@ class NBA extends Component{
         const month = new Date().getMonth();
         if(month===6 ||month === 7||month===8){
             this.setState({
-                ST:"2018-08-04",
+                ST:"2018-07-18",
                 EN:"2018-10-01"
             })
         }else{
