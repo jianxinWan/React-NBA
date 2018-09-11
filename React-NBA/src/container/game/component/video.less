@@ -1,7 +1,83 @@
 .video-warp{
     width: 100%;
     height:auto;
+    position:relative;
     .video-play-btn{
-        
+        position: absolute;
+        left:50%;
+        width:76/16rem;
+        top:50%;
+        margin-top: -25/16rem;
+        height:50/16rem;
+        margin-left: -38/16rem;
+        background-color:rgba(23,23,23,.9);
+        border-radius:3px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .btn-play-icon{
+            display: block;
+            width: 0;
+            height: 0;
+            margin-left:23px;
+            overflow: hidden;
+            border: 20px solid transparent;
+            border-width: 12px 21px;
+            border-left-color:#fff;
+        }
     }
+    .video-control-warp{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 40px;
+        background-color: rgba(23,23,23,.9);
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        .control-pase-btn{
+            width: 46/16rem;
+            height: 100%;
+            background-color: antiquewhite;
+        }
+        .control-time-bar{
+            width: 100%;
+            height: 100%;
+            flex: 2;
+            background-color: aqua;
+        }
+        .control-full-screen{
+            width:50px;
+            height:100%;
+            background-color: blueviolet;
+        }
+    }
+}
+.slideInBottom{
+    -webkit-animation: slideInBottom 0.4s ease;
+    animation: slideInBottom 0.4s ease;
+    opacity: 1;
+}
+@-webkit-keyframes slideInBottom {
+    from { -webkit-transform: translateY(100%); opacity: 0}
+    to{opacity: 1}
+}
+@keyframes slideInBottom {
+    from { -webkit-transform: translateY(100%); transform: translateY(100%); opacity: 0}
+    to{opacity: 1}
+}
+.slideOutBottom{
+    -webkit-animation: slideOutBottom 0.4s ease;
+    animation: slideOutBottom 0.4s ease;
+    opacity: 0;
+}
+@-webkit-keyframes slideOutBottom{
+    from {opacity: 1; }
+    to{opacity: 0; -webkit-transform: translateY(100%)}
+}
+@keyframes slideOutBottom{
+    from {opacity: 1}
+    to{opacity: 0;transform:translateY(100%)}
 }
