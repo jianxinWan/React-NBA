@@ -7,10 +7,10 @@ class Video extends Component{
         this.state = ({
             videoUrl : "",
             getUrlFinish:false,
-            showPase:false,
+            showPase:true,
             showControlFlag:false,
-            currentTime:"00:00",
-            duration:"00:00"
+            currentTime:0,
+            duration:0
         })
         this.pasePlay  = this.pasePlay.bind(this);
         this.showControl = this.showControl.bind(this);
@@ -71,7 +71,6 @@ class Video extends Component{
         const url = "http://h5vv.video.qq.com/getinfo?callback=?&platform=11001&charge=0&otype=json&ehost=http%3A%2F%2Fsports.qq.com&sphls=1&sb=1&nocache=0&_rnd=1536484898&guid=094fb994538cb2bce6416a71264523c7&appVer=V2.0Build9500&vids="+ this.props.vid +"&defaultfmt=auto&&_qv_rmt=JmrCi+j3A13449HOL=&_qv_rmt2=g61U6tlp156888yhw=&sdtfrom=v5010&callback=?";
         $.getJSON(url,(res)=>{
             const videoUrl = "http://117.34.59.30/sports.tc.qq.com/A811j1pG6Zg_OjiB-VYjLg_nwfPoBqBGA-C134ruJ9kM/"+res.vl.vi[0].fn+"?vkey=" +res.vl.vi[0].fvkey+"&guid=094fb994538cb2bce6416a71264523c7";
-            resolve();
             this.setState({
                 videoUrl:videoUrl,
                 getUrlFinish:true
@@ -79,17 +78,18 @@ class Video extends Component{
         })
     }
     changePlayTime(e){
-        const playBar = e.target;
-        console.log(e.clientX,e.clientY);
-        console.log(playBar.offsetLeft);
+        let allBar = this.refs.allBar.getBoundingClientRect();
+        let left = e.clientX - allBar.left;
+        let ratio = left/allBar.width;
+        if(this.state.duration !== 0){
+            this.setState({
+                currentTime:this.state.duration*ratio
+            })
+            this.refs.video.currentTime = this.state.duration*ratio;
+        }
     }
     componentDidMount(){
-        const promise  = new Promise((resolve,reject)=>{
-            this.getVideoUrl(resolve);
-        }).then(()=>{
-        }).catch((err)=>{
-            console.log(err);
-        })
+        this.getVideoUrl();
     }
     render(){
         let urlWarp = null;
@@ -97,7 +97,7 @@ class Video extends Component{
             urlWarp = (
                 <div className="video-warp">
                     <div className="video-show">
-                        <video ref="video" name="media" autoPlay="autoPlay" width="100%" height="auto" onClick={this.showControl} onPlay={this.getPlayTime} onEnded={this.onEnded}>
+                        <video ref="video" name="media" width="100%" height="auto" onClick={this.showControl} onPlay={this.getPlayTime} onEnded={this.onEnded}>
                             <source src={this.state.videoUrl} type="video/mp4" />
                         </video>
                     </div>
@@ -120,7 +120,7 @@ class Video extends Component{
                             }
                         </div>
                         <div className="control-time-bar">
-                            <div className="play-all-bar" onClick={this.changePlayTime}>
+                            <div className="play-all-bar" ref="allBar"  onClick={this.changePlayTime}>
                                 <div className="play-actual-bar" style={{width:(this.state.currentTime/this.state.duration)*100+'%'}}></div>
                                 <span style={{left:(this.state.currentTime/this.state.duration)*100+'%'}}></span>
                             </div>
