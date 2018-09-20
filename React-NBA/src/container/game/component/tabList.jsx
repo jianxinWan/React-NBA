@@ -7,13 +7,14 @@ class TabList extends Component{
     }
     componentDidMount(){
         console.log(this.props.gameId);
+        console.log(this.props.gameInfo);
     }
     render(){
         return (
             <React.Fragment>
                 <GameTabs>
                     <div name="回顾">
-                        <Review gameId = {this.props.gameId}></Review>
+                        <Review gameInfo={this.props.gameInfo}></Review>
                     </div>
                     <div name="赛事">
                         第二部分

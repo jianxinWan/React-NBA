@@ -44,7 +44,7 @@ class Game extends Component{
                 <Video vid = {gameInfo.stats[0].list[0].vid}></Video>
             )
             GameInfoWarp = (
-                <TabList gameId = {this.props.match.params.mid}></TabList>
+                <TabList gameId = {this.props.match.params.mid} gameInfo={this.state.gameInfo} ></TabList>
             )
         }
         return (
