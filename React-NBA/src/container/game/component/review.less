@@ -60,13 +60,14 @@
             overflow-x: scroll;
             overflow-y:hidden;
             .collection-item{
+                position: relative;
                 border-radius:5px;
                 padding: 1rem 0.5rem;
                 background-color:#f4f5f7; 
                 margin-left: 10px;
+                color:#000;
                 .text{
-                    width:120/16rem;
-                    color:#000;
+                    width:120/16rem;    
                     font-size:14px;
                     height:60/16rem;                    
                     overflow: hidden;
@@ -75,8 +76,19 @@
                     -webkit-line-clamp: 3;
                     -webkit-box-orient: vertical;
                 }
+                .tag{
+                    width:24/16rem;
+                    height: 1rem;
+                    background-color: #2979ff;
+                    color: white;
+                    position:absolute;
+                    right: 0;
+                    top: 0;
+                    font-size: 0.7rem;
+                    border-radius: 2px;
+                }
             }
-            .collection-item:hover{
+            .collection-active{
                 color:#2979ff;
             }
         }
