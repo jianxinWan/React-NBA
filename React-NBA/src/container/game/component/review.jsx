@@ -1,26 +1,31 @@
 import React,{Component} from 'react';
 import './review.less';
-import {connect} from 'react-redux';
-import {setVideo} from '../../../actions/index';
 class Review extends Component{
     constructor(props){
         super(props);
         this.state = {
             current:0
         }
+        this.collectionList = this.collectionList.bind(this);
+    }
+    collectionList(item){
+        this.props.changeVideo(item);
     }
     componentDidMount(){
+        console.log(this.props.changeVideo);
         console.log(this.props.gameInfo);
     }
     nowVideo = (index)=>{
         return index === this.state.current ? 'collection-item collection-active' :'collection-item';
     }
     render(){
-        console.log(this.props);
         const scoreInfo = this.props.gameInfo.teamInfo;
         const collectionList = this.props.gameInfo.stats[0].list.map((item,index)=>{
             return (
-                <div className={this.nowVideo(index)} key={index} onClick={()=> this.setState({current:index})}>
+                <div className={this.nowVideo(index)} key={index} onClick={()=>{
+                    this.setState({current:index});
+                    this.collectionList(item)
+                }}>
                     <p className="text">
                         {item.title}
                     </p>
@@ -51,21 +56,11 @@ class Review extends Component{
                         {collectionList}
                     </div>
                 </div>
-                <div className="game-new"> 
+                <div className="game-new">
                     
                 </div>
             </div>            
         )
     }
 }
-let mapState = (state) => {
-    return state;
-}
-let mapDispatch = (dispatch) =>{
-    return {
-        setNowPage:(...args) => dispatch(
-            setVideo(...args)
-        )
-    }
-}
-export default connect(mapState,mapDispatch)(Review);
+export default Review;

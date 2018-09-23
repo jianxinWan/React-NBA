@@ -9,7 +9,9 @@ class Game extends Component{
         super(props);
         this.state = {
             gameInfo:[],
-            getInfoFinished:false
+            getInfoFinished:false,
+            vid:"",
+            videoUrlChanged:false
         }
     }
     getGameInfo(){
@@ -17,8 +19,15 @@ class Game extends Component{
         $.getJSON(url,(res)=>{
             this.setState({
                 gameInfo:res[1],
-                getInfoFinished:true
+                getInfoFinished:true,
+                vid:res[1].stats[0].list[0].vid
             })
+        })
+    }
+    changeVideo(item){
+        this.setState({
+            vid:item.vid,
+            videoUrlChanged:true
         })
     }
     componentDidMount(){
@@ -29,7 +38,7 @@ class Game extends Component{
         let title = null;
         let videoWarp = null;
         let GameInfoWarp = null;
-        if(this.state.getInfoFinished){
+        if(this.state.getInfoFinished  || this.state.videoUrlChanged){
             title = ( 
                 <p className="game-title">
                     <NavLink to="/home/nba">
@@ -41,10 +50,10 @@ class Game extends Component{
                 </p>
             )
             videoWarp = (
-                <Video vid = {gameInfo.stats[0].list[0].vid}></Video>
+                <Video vid = {this.state.vid}></Video>
             )
             GameInfoWarp = (
-                <TabList gameId = {this.props.match.params.mid} gameInfo={this.state.gameInfo} ></TabList>
+                <TabList gameId = {this.props.match.params.mid} gameInfo={this.state.gameInfo} changeVideo={this.changeVideo.bind(this)}></TabList>
             )
         }
         return (

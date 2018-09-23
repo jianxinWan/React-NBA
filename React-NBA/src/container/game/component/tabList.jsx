@@ -5,6 +5,9 @@ class TabList extends Component{
     constructor(props){
         super(props);
     }
+    changeVideo(item){
+        this.props.changeVideo(item);
+    }
     componentDidMount(){
         console.log(this.props.gameId);
         console.log(this.props.gameInfo);
@@ -14,7 +17,7 @@ class TabList extends Component{
             <React.Fragment>
                 <GameTabs>
                     <div name="回顾">
-                        <Review gameInfo={this.props.gameInfo}></Review>
+                        <Review gameInfo={this.props.gameInfo} changeVideo={this.changeVideo.bind(this)} ></Review>
                     </div>
                     <div name="赛事">
                         第二部分

@@ -67,13 +67,14 @@ class Video extends Component{
         const video = this.refs.video;
         video.webkitRequestFullScreen();
     }
-    getVideoUrl(resolve){
-        const url = "http://h5vv.video.qq.com/getinfo?callback=?&platform=11001&charge=0&otype=json&ehost=http%3A%2F%2Fsports.qq.com&sphls=1&sb=1&nocache=0&_rnd=1536484898&guid=094fb994538cb2bce6416a71264523c7&appVer=V2.0Build9500&vids="+ this.props.vid +"&defaultfmt=auto&&_qv_rmt=JmrCi+j3A13449HOL=&_qv_rmt2=g61U6tlp156888yhw=&sdtfrom=v5010&callback=?";
+    getVideoUrl(){
+        const url = "http://h5vv.video.qq.com/getinfo?callback=?&platform=11001&charge=0&otype=json&ehost=http%3A%2F%2Fsports.qq.com&sphls=1&sb=1&nocache=0&_rnd=1536484898&guid=094fb994538cb2bce6416a71264523c7&appVer=V2.0Build9500&vids="+ this.state.vid +"&defaultfmt=auto&&_qv_rmt=JmrCi+j3A13449HOL=&_qv_rmt2=g61U6tlp156888yhw=&sdtfrom=v5010&callback=?";
         $.getJSON(url,(res)=>{
             const videoUrl = "http://117.34.59.30/sports.tc.qq.com/A811j1pG6Zg_OjiB-VYjLg_nwfPoBqBGA-C134ruJ9kM/"+res.vl.vi[0].fn+"?vkey=" +res.vl.vi[0].fvkey+"&guid=094fb994538cb2bce6416a71264523c7";
             this.setState({
                 videoUrl:videoUrl,
-                getUrlFinish:true
+                getUrlFinish:true,
+                vid:""
             })
         })
     }
@@ -89,7 +90,29 @@ class Video extends Component{
         }
     }
     componentDidMount(){
-        this.getVideoUrl();
+        const promise = new Promise((resolve,reject)=>{
+            this.setState({
+                vid:this.props.vid
+            })
+            resolve();
+        }).then(()=>{
+            this.getVideoUrl();
+        })
+    }
+    componentWillReceiveProps(nextProps){
+        const promise = new Promise((resolve,reject)=>{
+            this.setState({
+                vid:nextProps.vid
+            })
+            resolve();
+        }).then(()=>{
+            this.getVideoUrl();
+        }).then(()=>{
+            this.refs.video.load();
+            this.setState({
+                showPase:true
+            })
+        })
     }
     render(){
         let urlWarp = null;
