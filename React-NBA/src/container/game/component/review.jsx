@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import './review.less';
+import Score from './score';
 class Review extends Component{
     constructor(props){
         super(props);
@@ -12,14 +13,12 @@ class Review extends Component{
         this.props.changeVideo(item);
     }
     componentDidMount(){
-        console.log(this.props.changeVideo);
-        console.log(this.props.gameInfo);
+        console.log(this.props.matchResult);
     }
     nowVideo = (index)=>{
         return index === this.state.current ? 'collection-item collection-active' :'collection-item';
     }
     render(){
-        const scoreInfo = this.props.gameInfo.teamInfo;
         const collectionList = this.props.gameInfo.stats[0].list.map((item,index)=>{
             return (
                 <div className={this.nowVideo(index)} key={index} onClick={()=>{
@@ -35,21 +34,7 @@ class Review extends Component{
         });
         return (
             <div className="review-warp">
-                <div className="scoer-warp">
-                    <div className="left team">
-                        <img src={scoreInfo.leftBadge} />
-                        <span>{scoreInfo.leftName}</span>
-                    </div>
-                    <div className="center">
-                        <p>
-                            <span>{scoreInfo.leftGoal}</span> - <span>{scoreInfo.rightGoal}</span>
-                        </p>
-                    </div>
-                    <div className="right team">
-                        <img src={scoreInfo.rightBadge} />
-                        <span>{scoreInfo.rightName}</span>
-                    </div>
-                </div>
+                <Score  matchInfo={this.props.matchResult.data.matchInfo} ></Score>
                 <div className="collection-warp">
                     <h3>集锦</h3>
                     <div className="collection-list">

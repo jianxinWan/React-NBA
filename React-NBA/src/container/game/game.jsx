@@ -58,9 +58,13 @@ class Game extends Component{
         }
         return (
             <div className="game-warp">
-                {title}
-                {videoWarp}
-                {GameInfoWarp}
+                <div className="game-top-warp">
+                    {title}
+                    {videoWarp}
+                </div>
+                <div className="game-bottom-warp">
+                    {GameInfoWarp}
+                </div>
             </div>
         )
     }
