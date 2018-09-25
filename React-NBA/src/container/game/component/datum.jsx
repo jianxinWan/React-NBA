@@ -52,24 +52,40 @@ class Datum extends Component{
             )
         }
         if(gameInfo){
+            const playerList = gameInfo.stats[3].basketballBestPlayers.map((item,index)=>{
+                return (
+                    <tr key={index} className="player-tr">
+                        <th width="40%" className="left">
+                            <img src={item.leftPlayer.icon} />
+                            <div className="num-and-name" style={{'textAlign':'left'}}>
+                                <span >{item.leftPlayer.jerseyNum}</span>
+                                <span>{item.leftPlayer.name}</span>
+                            </div>
+                        </th>
+                        <th width="20%" className="center">{item.text}</th>
+                        <th width="40%" className="right">
+                            <div className="num-and-name" style={{'textAlign':'right'}}>
+                                <span >{item.rightPlayer.jerseyNum}</span>
+                                <span>{item.rightPlayer.name}</span>
+                            </div>
+                            <img src={item.rightPlayer.icon} />
+                        </th>
+                    </tr>
+                )
+            })
             mvpPlayer = (
                 <div className="mvp-player">
                     <h3>本场最佳</h3>
-                    <p>哈哈哈</p>
                     <table className="mvp-player-table">
                         <thead>
                             <tr>
-                                <th><img src={gameInfo.teamInfo.leftBadge} /><span>{gameInfo.teamInfo.leftName}</span></th>
-                                <th>222222</th>
-                                <th><img src={gameInfo.teamInfo.rightBadge} /><span>{gameInfo.teamInfo.rightName}</span></th>
+                                <th className="left" width="40%"><img src={gameInfo.teamInfo.leftBadge} /><span>{gameInfo.teamInfo.leftName}</span></th>
+                                <th width="20%" className="center">vs</th>
+                                <th className="right" width="40%"><span>{gameInfo.teamInfo.rightName}</span><img src={gameInfo.teamInfo.rightBadge} /></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                            </tr>
+                            {playerList}
                         </tbody>
                     </table>
                 </div>

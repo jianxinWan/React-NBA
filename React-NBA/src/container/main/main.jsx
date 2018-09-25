@@ -191,7 +191,7 @@ class Index extends Component{
                     <div className = {['main-header-warp'].join(" ")} >
                         <div className="header-left-logo">
                             <img src="http://mat1.gtimg.com/sports/sportAppWeb/kbsshare/statics/icon-logo40x40_6cc48e.png" alt="top-logo" />
-                            <span>今日赛事</span>
+                            <span>今日看点</span>
                         </div>
                         <div className="header-right-warp">
                             <div className="shwo-page-warp">

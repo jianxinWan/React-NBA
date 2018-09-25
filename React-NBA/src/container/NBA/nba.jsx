@@ -114,11 +114,6 @@ class NBA extends Component{
             })
         });
     }
-    componentWillUnmount(){
-        this.setState = (state,callback)=>{
-            return;
-        };
-    }
     componentDidMount(){
         window.onscroll = ()=>{
             this.isTopOrBottom(); 
