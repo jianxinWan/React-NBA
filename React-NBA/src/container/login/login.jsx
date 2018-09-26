@@ -9,6 +9,7 @@ class Login extends Component{
     constructor(props){
         super(props);
         this.state = ({
+            checkNum:true,
             teamLogoList:[
                 {
                     logoLink:"http://mat1.gtimg.com/sports/nba/logo/1602/10.png",
@@ -30,6 +31,7 @@ class Login extends Component{
                 }
             ]
         })
+        this.checkNumFun = this.checkNumFun.bind(this);
     }
     createLogoSlide(){
         const mySwiper1 = new Swiper('.swiper-container',{
@@ -40,6 +42,25 @@ class Login extends Component{
             speed:1000,
             effect : 'fade'
         })
+    }
+    checkNumFun(){
+        let numInput = this.refs.num;
+        let regPhone = /^[1][3,4,5,6,7,8][0-9]{9}$/;
+        let regEmail = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/;
+        if(!regEmail.test(numInput.value)){
+            this.setState({
+                checkNum:false
+            })   
+        }else{
+            this.setState({
+                checkNum:true
+            })
+        }
+        if(numInput.value === ''){
+            this.setState({
+                checkNum:true
+            })
+        }
     }
     componentDidMount(){
         this.createLogoSlide();
@@ -54,6 +75,7 @@ class Login extends Component{
                 </div>  
             )
         })
+        let checkNum = null;
         return (
             <div className="login-warp">
                 <div className="login">
@@ -65,7 +87,7 @@ class Login extends Component{
                         </div>
                     </div>
                     <div className="login-form-warp">
-                        <input type="text" placeholder="QQ号码/手机号/邮箱" />
+                        <input type="text" placeholder="请输入你的邮箱" onKeyUp={this.checkNumFun} ref="num"/>
                         <input type="password" placeholder="请输入你的密码" />
                         <div className="login-btn">登录</div>
                         <div className="login-by-more">更多方式</div>
@@ -74,6 +96,9 @@ class Login extends Component{
                         <span>忘了密码？</span>
                         <span>注册新账号</span>
                     </div> 
+                    <div className="reg-warp">
+                        <span style={{'display':this.state.checkNum?'none':'block','color':'red'}}>请输入正确格式的邮箱</span>
+                    </div>
                 </div>
             </div>
         )
