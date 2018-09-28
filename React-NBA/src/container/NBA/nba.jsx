@@ -7,8 +7,6 @@ import {setPageInfo} from '../../actions/index';
 import $ from 'jquery';
 import './nba.less';
 import NowDayGame from './game/component/nowDayGame';
-
-
 class NBA extends Component{
     constructor(props){
         super(props);
