@@ -1,5 +1,7 @@
 import React,{Component} from 'react';
-
+import axios from 'axios';
+import Qs from 'querystring';
+import {Redirect} from 'react-router-dom';
 import Swiper from 'swiper/dist/js/swiper'
 import 'swiper/dist/css/swiper.min.css'
 
@@ -10,6 +12,7 @@ class Login extends Component{
         super(props);
         this.state = ({
             checkNum:true,
+            signIned:false,
             teamLogoList:[
                 {
                     logoLink:"http://mat1.gtimg.com/sports/nba/logo/1602/10.png",
@@ -32,6 +35,7 @@ class Login extends Component{
             ]
         })
         this.checkNumFun = this.checkNumFun.bind(this);
+        this.login = this.login.bind(this);
     }
     createLogoSlide(){
         const mySwiper1 = new Swiper('.swiper-container',{
@@ -62,10 +66,43 @@ class Login extends Component{
             })
         }
     }
+    login(){
+        const isNull = this.refs.num.value.trim() !=='' && this.refs.pass.value.trim() !=='';
+        if(this.checkNumFun && isNull){
+            axios({
+                url:'http://localhost:8848/user/signIn',
+                method:'post',
+                data:Qs.stringify({
+                email:this.refs.num.value,
+                password:this.refs.pass.value
+                }),
+                // withCredentials: true
+            }).then((res)=>{
+                const data = res.data;
+                if(data.result.success){
+                    sessionStorage.setItem('token',`${data.token}`);
+                    this.setState({
+                        signIned:true
+                    })
+                }else{
+                    alert("登录失败，请检查密码与邮箱重试");
+                }
+            }).catch((err)=>{
+                console.log(err);
+            })
+        }else{
+            alert("请检查你输入内容");
+        }
+    }
     componentDidMount(){
         this.createLogoSlide();
     }
     render(){
+        if(this.state.signIned){
+            return (
+                <Redirect to="/mydoc" />
+            )
+        }
         const slidelogoList = this.state.teamLogoList.map((slide,index)=>{
             return (
                 <div className="swiper-slide" key={index}>
@@ -75,7 +112,6 @@ class Login extends Component{
                 </div>  
             )
         })
-        let checkNum = null;
         return (
             <div className="login-warp">
                 <div className="login">
@@ -88,13 +124,15 @@ class Login extends Component{
                     </div>
                     <div className="login-form-warp">
                         <input type="text" placeholder="请输入你的邮箱" onKeyUp={this.checkNumFun} ref="num"/>
-                        <input type="password" placeholder="请输入你的密码" />
-                        <div className="login-btn">登录</div>
+                        <input type="password" placeholder="请输入你的密码" ref="pass"/>
+                        <div className="login-btn" onClick={this.login}>登录</div>
                         <div className="login-by-more">更多方式</div>
                     </div>
                     <div className="swith-warp">
                         <span>忘了密码？</span>
-                        <span>注册新账号</span>
+                        <a href="/#/signUp">
+                            <span>注册新账号</span>
+                        </a>
                     </div> 
                     <div className="reg-warp">
                         <span style={{'display':this.state.checkNum?'none':'block','color':'red'}}>请输入正确格式的邮箱</span>

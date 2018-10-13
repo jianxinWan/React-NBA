@@ -11,7 +11,9 @@ import {
 } from 'react-router-dom'
 import App from '../container/App/app';
 import Index from '../container/main/index';
-import Login from '../container/login/login';
+import Login from '../container/user/login';
+import SignUp from '../container/user/signUp';
+import Mydoc from '../container/user/mydoc';
 import NBA from '../container/NBA/nba';
 import Game from '../container/game/game';
 import CBA from '../container/CBA/cba';
@@ -22,7 +24,6 @@ import Team from '../container/NBA/team/team';
 import TeamDetail from '../container/NBA/team/teamDetail';
 import Player from '../container/NBA/player/player';
 import PlayerDetail from '../container/NBA/player/playerDetail';
-
 const store = configureStore();
 const router = (
     <Router>
@@ -50,6 +51,8 @@ const router = (
                         <Game {...props} />
                     } />
                     <Route path="/login" component={Login} />
+                    <Route path="/signUp" component={SignUp} />
+                    <Route path="/mydoc" component={Mydoc} />
                 </Switch>
             </App>
         </Provider>

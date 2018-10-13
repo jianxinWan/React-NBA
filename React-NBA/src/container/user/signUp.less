@@ -1,0 +1,72 @@
+.signUp-warp{
+    padding-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    .logo-warp{
+        width: 80%;
+        height: 6rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        img{
+            width: 6rem;
+            height: auto;
+        }
+    }
+    .form-warp{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        width: 290/16rem;
+        margin:1rem 1rem 0 1rem;
+        input{
+            z-index:2;
+            width:258/16rem;
+            height: 44/16rem;
+            font-size:1.1rem;
+            border-radius:3px;
+            padding:0 1rem;
+            outline:none;
+            border: 1px solid  #eee;
+        }
+        input:focus{
+            border:0.05rem solid rgb(80,191,255);
+            color:#000;
+            outline:1px solid rgb(80,191,255);
+            box-shadow: 1px 1px 2px 2px #eee;
+        }
+        input::-webkit-input-placeholder{
+            color:#aaa;
+            font-size:1rem;
+        }
+        .getEmailCode{
+            width:100%;
+            text-align: center;
+            height: 44/16rem;
+            line-height: 44/16rem;
+            background: #146fdf;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 1rem;
+            margin-top: 1rem;
+        }
+
+    }        
+    .error-warp{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin-top: 3rem;
+        width: 100%;
+        height: 3rem;
+        p{
+            text-align: center;
+        }
+    }
+}
