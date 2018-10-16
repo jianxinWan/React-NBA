@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import axios from 'axios';
-import {Redirect} from 'react-router-dom';
+import {Redirect,NavLink} from 'react-router-dom';
 import Swiper from 'swiper/dist/js/swiper'
 import 'swiper/dist/css/swiper.min.css'
 
@@ -129,9 +129,9 @@ class Login extends Component{
                     </div>
                     <div className="swith-warp">
                         <span>忘了密码？</span>
-                        <a href="/#/signUp">
+                        <NavLink to="/signUp">
                             <span>注册新账号</span>
-                        </a>
+                        </NavLink>
                     </div> 
                     <div className="reg-warp">
                         <span style={{'display':this.state.checkNum?'none':'block','color':'red'}}>请输入正确格式的邮箱</span>

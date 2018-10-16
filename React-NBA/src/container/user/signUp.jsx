@@ -55,7 +55,10 @@ class SignUp extends Component{
                     });
                 }
             }).catch((err)=>{
-                console.log(err);
+                msgOpen({
+                    msgType:'fail',
+                    msg:'请检查你的输入'
+                });
             })
         }else{
             msgOpen({
