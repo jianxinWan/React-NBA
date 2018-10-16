@@ -12,6 +12,7 @@ import {
 import App from '../container/App/app';
 import Index from '../container/main/index';
 import Login from '../container/user/login';
+import EamilVerify from '../container/user/emailVerify';
 import SignUp from '../container/user/signUp';
 import Mydoc from '../container/user/mydoc';
 import NBA from '../container/NBA/nba';
@@ -51,6 +52,7 @@ const router = (
                         <Game {...props} />
                     } />
                     <Route path="/login" component={Login} />
+                    <Route path="/emailVerify" component={EamilVerify} />
                     <Route path="/signUp" component={SignUp} />
                     <Route path="/mydoc" component={Mydoc} />
                 </Switch>

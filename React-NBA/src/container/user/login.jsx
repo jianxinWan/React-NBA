@@ -129,7 +129,7 @@ class Login extends Component{
                     </div>
                     <div className="swith-warp">
                         <span>忘了密码？</span>
-                        <NavLink to="/signUp">
+                        <NavLink to="/emailVerify">
                             <span>注册新账号</span>
                         </NavLink>
                     </div> 
