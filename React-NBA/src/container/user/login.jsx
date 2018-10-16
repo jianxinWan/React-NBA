@@ -1,6 +1,5 @@
 import React,{Component} from 'react';
 import axios from 'axios';
-import Qs from 'querystring';
 import {Redirect} from 'react-router-dom';
 import Swiper from 'swiper/dist/js/swiper'
 import 'swiper/dist/css/swiper.min.css'
@@ -72,11 +71,11 @@ class Login extends Component{
             axios({
                 url:'http://localhost:8848/user/signIn',
                 method:'post',
-                data:Qs.stringify({
-                email:this.refs.num.value,
-                password:this.refs.pass.value
-                }),
-                // withCredentials: true
+                data:{
+                    email:this.refs.num.value,
+                    password:this.refs.pass.value
+                },
+                withCredentials: true
             }).then((res)=>{
                 const data = res.data;
                 if(data.result.success){

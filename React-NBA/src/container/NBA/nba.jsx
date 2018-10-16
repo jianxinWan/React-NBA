@@ -13,8 +13,8 @@ class NBA extends Component{
         this.state = ({
             getInfoFinished:false,
             gameInfo:{},
-            ST:"",
-            EN:""
+            ST:"2018-10-17",
+            EN:"2018-10-25"
         })
     }
     isTopOrBottom(){
@@ -42,8 +42,8 @@ class NBA extends Component{
             })
         }else{
             this.setState({
-                ST:this.getDate(mydata.setDate(mydata.getDate()-2)),
-                EN:this.getDate(mydata.setDate(mydata.getDate()+2))
+                ST:this.getDate(mydata.setDate(mydata.getDate()+1)),
+                EN:this.getDate(mydata.setDate(mydata.getDate()+4))
             })
         }
     }

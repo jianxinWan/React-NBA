@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import axios from 'axios';
+import $ from 'jquery';
 import './mydoc.less';
 class Mydoc extends Component{
     constructor(props){
@@ -10,9 +11,7 @@ class Mydoc extends Component{
         const token = sessionStorage.getItem('token');
         console.log(token);
         axios.get('http://localhost:8848/user/getUserInfo',{
-            headers: {
-                'Authorization':token,
-            },
+            headers: {'Authorization': token}
         }).then((res)=>{
             console.log(res);
         }).catch((err)=>{
