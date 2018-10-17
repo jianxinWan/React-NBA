@@ -1,12 +1,13 @@
 import React,{Component} from 'react';
-import $ from 'jquery';
+// import $ from 'jquery';
 class TeamData extends Component{
-    constructor(props){
-        super(props);
-    }
-    componentDidMount(){
-        console.log(this.props.teamId);
-    }
+    // constructor(props){
+    //     super(n
+    // props);
+    // }
+    // componentDidMount(){
+    //     console.log(this.props.teamId);
+    // }
     render(){
         return (
             <div>

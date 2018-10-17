@@ -1,7 +1,4 @@
 import  React,{Component} from 'react';
-import $ from 'jquery';
-
-
 import PlayerCard from  './components/playerCard';
 import SelectTable from './components/selectTable';
 import './playerCount.less';

@@ -14,7 +14,7 @@ class Index extends Component{
         }
     }
     setPages(e){
-        const promise  = new Promise((reslove,reject)=>{
+        new Promise((reslove,reject)=>{
             this.props.setNowPage(e.target.innerHTML);
             reslove();
         }).then(()=>{

@@ -13,8 +13,8 @@ class NBA extends Component{
         this.state = ({
             getInfoFinished:false,
             gameInfo:{},
-            ST:"2018-10-17",
-            EN:"2018-10-25"
+            ST:"",
+            EN:""
         })
     }
     isTopOrBottom(){
@@ -42,7 +42,7 @@ class NBA extends Component{
             })
         }else{
             this.setState({
-                ST:this.getDate(mydata.setDate(mydata.getDate()+1)),
+                ST:this.getDate(mydata.setDate(mydata.getDate()-2)),
                 EN:this.getDate(mydata.setDate(mydata.getDate()+4))
             })
         }
@@ -116,7 +116,7 @@ class NBA extends Component{
         window.onscroll = ()=>{
             this.isTopOrBottom(); 
         }
-        const promise = new Promise((resolve,reject)=>{
+        new Promise((resolve,reject)=>{
             this.setInitDate();
             resolve();
         }).then(()=>{

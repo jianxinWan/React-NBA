@@ -7,12 +7,6 @@ import {
 
 import Main from  './main';
 class Index extends Component{
-    constructor(props){
-        super(props);
-    }
-    componentDidMount(){
-        
-    }
     render(){
         const {Nba,setNowPage} = this.props;
         return (
