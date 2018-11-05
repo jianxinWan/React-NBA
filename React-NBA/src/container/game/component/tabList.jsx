@@ -14,6 +14,11 @@ class TabList extends Component{
     changeVideo(item){
         this.props.changeVideo(item);
     }
+    componentWillUnmount(){
+        this.setState = (state,callback) =>{
+            return ;
+        }
+    }
     getMatchResult(){
         $.getJSON('http://matchweb.sports.qq.com/kbs/matchDetail?mid='+ this.props.gameId +'&from=sportsh5&callback=?',(res)=>{
             this.setState({

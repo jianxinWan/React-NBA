@@ -25,9 +25,15 @@ class AfterPlayCard extends Component{
                                 <span>{teamInfo.leftName}</span>
                             </div>
                             <div className="center">
-                                <p></p>
-                                <h1>VS</h1>
-                                <p></p>
+                                {teamInfo.leftGoal === "0" ? (
+                                <React.Fragment>
+                                    <h1>VS</h1>
+                                </React.Fragment>):(<React.Fragment>
+                                    <h2>{teamInfo.leftGoal}</h2>
+                                    <h2>:</h2>
+                                    <h2>{teamInfo.rightGoal}</h2>
+                                </React.Fragment>)}
+                                
                             </div>
                             <div  className="right logo">
                                 <img src={teamInfo.rightBadge} />

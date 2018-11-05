@@ -19,6 +19,11 @@ class Video extends Component{
         this.onEnded = this.onEnded.bind(this);
         this.changePlayTime = this.changePlayTime.bind(this);
     }
+    componentWillUnmount(){
+        this.setState = (state,callback) =>{
+            return ;
+        }
+    }
     showControl(){
         this.setState({
             showControlFlag:this.state.showControlFlag ? false:true
@@ -70,7 +75,7 @@ class Video extends Component{
     getVideoUrl(){
         const url = "http://h5vv.video.qq.com/getinfo?callback=?&platform=11001&charge=0&otype=json&ehost=http%3A%2F%2Fsports.qq.com&sphls=1&sb=1&nocache=0&_rnd=1536484898&guid=094fb994538cb2bce6416a71264523c7&appVer=V2.0Build9500&vids="+ this.state.vid +"&defaultfmt=auto&&_qv_rmt=JmrCi+j3A13449HOL=&_qv_rmt2=g61U6tlp156888yhw=&sdtfrom=v5010&callback=?";
         $.getJSON(url,(res)=>{
-            const videoUrl = "http://113.137.45.21/sports.tc.qq.com/A811j1pG6Zg_OjiB-VYjLg_nwfPoBqBGA-C134ruJ9kM/"+res.vl.vi[0].fn+"?vkey=" +res.vl.vi[0].fvkey+"&br=121&platform=2&fmt=auto&level=0&sdtfrom=v5010&guid=094fb994538cb2bce6416a71264523c7";
+            const videoUrl = "http://1.82.215.18/sports.tc.qq.com/A811j1pG6Zg_OjiB-VYjLg_nwfPoBqBGA-C134ruJ9kM/"+res.vl.vi[0].fn+"?vkey=" +res.vl.vi[0].fvkey+"&br=121&platform=2&fmt=auto&level=0&sdtfrom=v5010&guid=094fb994538cb2bce6416a71264523c7";
             this.setState({
                 videoUrl:videoUrl,
                 getUrlFinish:true,
@@ -90,7 +95,7 @@ class Video extends Component{
         }
     }
     componentDidMount(){
-        const promise = new Promise((resolve,reject)=>{
+        new Promise((resolve,reject)=>{
             this.setState({
                 vid:this.props.vid
             })

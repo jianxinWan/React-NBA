@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import axios from 'axios';
+import msg from '../../components/message/index';
 import {Redirect,NavLink} from 'react-router-dom';
 import Swiper from 'swiper/dist/js/swiper'
 import 'swiper/dist/css/swiper.min.css'
@@ -69,7 +70,7 @@ class Login extends Component{
         const isNull = this.refs.num.value.trim() !=='' && this.refs.pass.value.trim() !=='';
         if(this.checkNumFun && isNull){
             axios({
-                url:'http://localhost:8848/user/signIn',
+                url:'http://www.wvue.com.cn:8000/user/signIn',
                 method:'post',
                 data:{
                     email:this.refs.num.value,
@@ -80,17 +81,30 @@ class Login extends Component{
                 const data = res.data;
                 if(data.result.success){
                     sessionStorage.setItem('token',`${data.token}`);
-                    this.setState({
-                        signIned:true
+                    msg.msgOpen({
+                        msgType:'success',
+                        msg:'登陆成功'
                     })
+                    setTimeout(()=>{
+                        msg.msgClose(msg.msgOpen.container);
+                        this.setState({
+                            signIned:true
+                        })
+                    },2000);                    
                 }else{
-                    alert("登录失败，请检查密码与邮箱重试");
+                    msg.msgOpen({
+                        msgType:'fail',
+                        msg:'账号密码错误'
+                    })
                 }
             }).catch((err)=>{
                 console.log(err);
             })
         }else{
-            alert("请检查你输入内容");
+            msg.msgOpen({
+                msgType:'fail',
+                msg:'请检查你要输入的内容'
+            })
         }
     }
     componentDidMount(){

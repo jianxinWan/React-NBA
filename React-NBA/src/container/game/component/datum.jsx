@@ -5,9 +5,6 @@ class Datum extends Component{
     constructor(props){
         super(props);
     }
-    componentDidMount(){
-        console.log(this.props.gameInfo);
-    }
     render(){
         let gameDatum = null;
         let goalsTable = null;
@@ -61,9 +58,11 @@ class Datum extends Component{
                                 <span >{item.leftPlayer.jerseyNum}</span>
                                 <span>{item.leftPlayer.name}</span>
                             </div>
+                            <span>{item.leftVal}</span>
                         </th>
                         <th width="20%" className="center">{item.text}</th>
                         <th width="40%" className="right">
+                            <span>{item.rightVal}</span>
                             <div className="num-and-name" style={{'textAlign':'right'}}>
                                 <span >{item.rightPlayer.jerseyNum}</span>
                                 <span>{item.rightPlayer.name}</span>

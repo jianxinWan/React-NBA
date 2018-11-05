@@ -13,20 +13,22 @@ class GameItem extends Component{
     render(){
         const gameInfo = this.props.itemInfo;
         const startTime = this.props.itemInfo.startTime.slice(11,16);
-        let itemDate = new Date(gameInfo.startTime).getTime();
-        let todyDate = new Date().getTime();
         let scoreWarp = null;
-        if(itemDate<todyDate){
+        if(gameInfo.livePeriod>=1){
             scoreWarp = (
                 <div className="game-status">
-                    <p>
+                    <p style={{"color":gameInfo.livePeriod === "2"?'#000':'#ff4340'}}>
                         <span>{gameInfo.leftGoal}</span>
                         :
                         <span>{gameInfo.rightGoal}</span>
                     </p>
-                    <div className="game-icon">
-                        <i className="iconfont icon-iconfontshipin"></i>
-                        <span>集锦</span>
+                    <div className="game-icon" style={{"backgroundColor":gameInfo.livePeriod === "2"?'#2962ff':'#ff4340'}}>
+                        {gameInfo.livePeriod === "2"? (
+                            <React.Fragment>
+                                <i className="iconfont icon-iconfontshipin"></i>
+                                <span>集锦</span>
+                            </React.Fragment>
+                        ):gameInfo.quarter}
                     </div>
                 </div>
             )

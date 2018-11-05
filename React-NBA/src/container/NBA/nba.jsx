@@ -42,8 +42,8 @@ class NBA extends Component{
             })
         }else{
             this.setState({
-                ST:this.getDate(mydata.setDate(mydata.getDate()-2)),
-                EN:this.getDate(mydata.setDate(mydata.getDate()+4))
+                ST:this.getDate(mydata.setDate(mydata.getDate()-1)),
+                EN:this.getDate(mydata.setDate(mydata.getDate()+1))
             })
         }
     }
@@ -124,6 +124,11 @@ class NBA extends Component{
         }).catch((err)=>{
             console.log(err);
         })
+    }
+    componentWillUnmount(){
+        this.setState = (state,callback) =>{
+            return;
+        }
     }
     render(){
         let  gameList = [];

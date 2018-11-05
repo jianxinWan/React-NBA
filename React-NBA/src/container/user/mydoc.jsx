@@ -10,7 +10,7 @@ class Mydoc extends Component{
     getUserInfo(){
         const token = sessionStorage.getItem('token');
         console.log(token);
-        axios.get('http://localhost:8848/user/getUserInfo',{
+        axios.get('http://www.wvue.com.cn:8848/user/getUserInfo',{
             headers: {'Authorization': token}
         }).then((res)=>{
             console.log(res);

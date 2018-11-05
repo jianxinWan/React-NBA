@@ -10,15 +10,15 @@ import {
     Switch
 } from 'react-router-dom'
 import App from '../container/App/app';
-import Index from '../container/main/index';
-import Login from '../container/user/login';
-import EamilVerify from '../container/user/emailVerify';
-import SignUp from '../container/user/signUp';
-import Mydoc from '../container/user/mydoc';
+import Index from '../container/Main/index';
+import Login from '../container/User/login';
+import EamilVerify from '../container/User/emailVerify';
+import SignUp from '../container/User/signUp';
+import Mydoc from '../container/User/mydoc';
 import NBA from '../container/NBA/nba';
 import Game from '../container/game/game';
 import CBA from '../container/CBA/cba';
-import Esports from '../container/esports/esport';
+import Esports from '../container/Esports/esport';
 import Soccer from '../container/Soccer/soccer';
 import Community from '../container/Community/community';
 import Team from '../container/NBA/team/team';

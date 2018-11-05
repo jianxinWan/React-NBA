@@ -12,6 +12,11 @@ class PlayerCard extends Component{
             playerCardInfo:{}
         }
     }
+    componentWillUnmount(){
+        this.setState = (state,callback) =>{
+            return ;
+        }
+    }
     getPlaerCardInfo(){
         const {setNowPage}  = this.props;
         const url="http://matchweb.sports.qq.com/player/baseInfo?playerId="+ this.props.playerId +"&from=h5&_=1534582161888&callback=?";

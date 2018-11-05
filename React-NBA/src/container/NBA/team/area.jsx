@@ -9,13 +9,8 @@ class AreaTeam extends Component{
     constructor(props){
         super(props);
     }
-    componentDidMount(){
-        console.log(this.props.areaInfo);
-    }
-
     render(){
         let teamInfo = this.props.areaInfo;
-        console.log(teamInfo);
         const {setNowPage}  = this.props;
         let head = teamInfo.rank[0].head.map((item)=>{
             return (

@@ -16,7 +16,8 @@ class AfterPlay extends Component{
         let datumWarp = null;
         let futureGame = null;
         if(this.props.gameInfo){
-            const gameItem = gameInfo.stats[1].teamMatches.map((item,index)=>{
+            const teamMatches = gameInfo.stats[1].teamMatches || [];
+            const gameItem = teamMatches.map((item,index)=>{
                 let date = Number(item.startTime.slice(5,7))+'月'+ Number(item.startTime.slice(8,10)) +'日';
                 let hour = item.startTime.slice(11,16);
                 return (
@@ -49,10 +50,10 @@ class AfterPlay extends Component{
                 <div className="after-datum">
                     <h3>数据</h3>
                     <div className="datum">
-                        {gameInfo.stats[0].vs[0].title}
+                        {gameInfo.stats[0].vs?gameInfo.stats[0].vs[0].title : null}
                         <div>
-                            <span>{gameInfo.stats[0].vs[0].item.win}</span>
-                            <span>{gameInfo.stats[0].vs[0].item.loss}</span>
+                            <span>{gameInfo.stats[0].vs?gameInfo.stats[0].vs[0].item.win:null}</span>
+                            <span>{gameInfo.stats[0].vs?gameInfo.stats[0].vs[0].item.loss:null}</span>
                         </div>
                     </div>
                 </div>
@@ -66,8 +67,10 @@ class AfterPlay extends Component{
             afterWarp = (
                 <div className="after-all">
                     {afterPlayCard}
-                    {datumWarp}
-                    {futureGame}
+                    {gameInfo.stats[0].vs?(<React.Fragment>
+                        {datumWarp}
+                        {futureGame}
+                    </React.Fragment>):(<h3>免费直播待更新.....</h3>)}
                 </div>
             )
         }

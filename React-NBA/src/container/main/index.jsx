@@ -7,6 +7,11 @@ import {
 
 import Main from  './main';
 class Index extends Component{
+    componentWillUnmount(){
+        this.setState = (state,callback) =>{
+            return;
+        }
+    }
     render(){
         const {Nba,setNowPage} = this.props;
         return (

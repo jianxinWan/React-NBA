@@ -9,11 +9,13 @@ class Review extends Component{
         }
         this.collectionList = this.collectionList.bind(this);
     }
+    componentWillUnmount(){
+        this.setState = (state,callback) =>{
+            return ;
+        }
+    }
     collectionList(item){
         this.props.changeVideo(item);
-    }
-    componentDidMount(){
-        console.log(this.props.matchResult);
     }
     nowVideo = (index)=>{
         return index === this.state.current ? 'collection-item collection-active' :'collection-item';

@@ -15,14 +15,19 @@ class Game extends Component{
             videoUrlChanged:false
         }
     }
+    componentWillUnmount(){
+        this.setState = (state,callback) =>{
+            return ;
+        }
+    }
     getGameInfo(){
         let url="http://matchweb.sports.qq.com/html/matchStatV37?mid="+this.props.match.params.mid+"&callback=?";
         $.getJSON(url,(res)=>{
             if(res[1].stats.length === 5){
                 this.setState({
-                    gameInfo:res[1],
+                    gameInfo:res[1]||null,
                     getInfoFinished:true,
-                    vid:res[1].stats[0].list[0].vid
+                    vid:res[1].stats[0].list[0].vid||null
                 })
             }else{
                 this.setState({

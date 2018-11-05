@@ -10,6 +10,11 @@ class PlayerDatum extends Component{
             getInfoFlag:false
         }
     }
+    componentWillUnmount(){
+        this.setState = (state,callback) =>{
+            return ;
+        }
+    }
     getDatum(){
         const url = 'http://matchweb.sports.qq.com/player/profile?playerId='+ this.props.playerId+'&from=h5&_=1535504572047&callback=?';
         $.getJSON(url,(res)=>{

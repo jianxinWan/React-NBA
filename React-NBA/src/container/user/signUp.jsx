@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './signUp.less';
 import axios from 'axios';
-
-import msgOpen from './../../components/message/index';
+import {Redirect} from 'react-router-dom';
+import msg from './../../components/message/index';
 
 class SignUp extends Component{
     constructor(props){
@@ -10,7 +10,8 @@ class SignUp extends Component{
         this.state = {
             showForm:false,
             passFlag:false,
-            phoneFlag:false
+            phoneFlag:false,
+            toLogin:false
         }
         this.regPhone = this.regPhone.bind(this);
         this.checkPass = this.checkPass.bind(this);
@@ -21,13 +22,13 @@ class SignUp extends Component{
     signUp(){
         const inputCheck =  this.refs.userName.value.trim() !== '' && this.refs.emailCode.value.trim().length === 6 && this.state.phoneFlag && this.state.passFlag;
         if(!inputCheck){
-            msgOpen({
+            msg.msgOpen({
                 msgType:'fail',
                 msg:'请检查你的输入'
             })
         }else{
             axios({
-                url:'http://localhost:8848/user/signUp',
+                url:'http://www.wvue.com.cn:8000/user/signUp',
                 method:'post',
                 data:{
                     userName:this.refs.userName.value.trim(),
@@ -37,7 +38,23 @@ class SignUp extends Component{
                 },
                 withCredentials: true
             }).then((res)=>{
-                console.log(res);
+                if(res.data.success){
+                    msg.msgOpen({
+                        msgType:'success',
+                        msg:'注册成功'
+                    })
+                    setTimeout(()=>{
+                        msg.msgClose(msg.msgOpen.container);
+                        this.setState({
+                            toLogin:true
+                        })
+                    },2000);
+                }else{
+                    msg.msgOpen({
+                        msgType:'fail',
+                        msg:res.data.msg
+                    })
+                }
             }).catch((err)=>{
                 console.log(err);
             })
@@ -83,6 +100,12 @@ class SignUp extends Component{
         }
     }
     render(){
+        let toLogin = null;
+        if(this.state.toLogin){
+            toLogin = (
+                <Redirect to="/login" />
+            )
+        }
         return (
             <div className="sign-warp">
                 <div className="top-logo">
@@ -98,6 +121,7 @@ class SignUp extends Component{
                         注册
                     </div>
                 </div>
+                {toLogin}
             </div>
         )
     }
