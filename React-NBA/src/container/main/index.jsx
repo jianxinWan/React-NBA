@@ -13,9 +13,9 @@ class Index extends Component{
         }
     }
     render(){
-        const {Nba,setNowPage} = this.props;
+        const {Nba,setNowPage,User} = this.props;
         return (
-            <Main setNowPage={setNowPage} nowPage={Nba.nowPage}>
+            <Main setNowPage={setNowPage} nowPage={Nba.nowPage} userState = {User}>
                 {this.props.children}
             </Main>
         )

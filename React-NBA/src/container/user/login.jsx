@@ -4,7 +4,7 @@ import msg from '../../components/message/index';
 import {Redirect,NavLink} from 'react-router-dom';
 import Swiper from 'swiper/dist/js/swiper'
 import 'swiper/dist/css/swiper.min.css'
-
+import URL from './url';
 import './login.less';
 
 class Login extends Component{
@@ -69,8 +69,9 @@ class Login extends Component{
     login(){
         const isNull = this.refs.num.value.trim() !=='' && this.refs.pass.value.trim() !=='';
         if(this.checkNumFun && isNull){
+            console.log(URL.signIn);
             axios({
-                url:'http://www.wvue.com.cn:8000/user/signIn',
+                url:URL.signIn,
                 method:'post',
                 data:{
                     email:this.refs.num.value,

@@ -3,7 +3,7 @@ import './signUp.less';
 import axios from 'axios';
 import {Redirect} from 'react-router-dom';
 import msg from './../../components/message/index';
-
+import URL from './url';
 class SignUp extends Component{
     constructor(props){
         super(props);
@@ -28,7 +28,7 @@ class SignUp extends Component{
             })
         }else{
             axios({
-                url:'http://www.wvue.com.cn:8000/user/signUp',
+                url:URL.singUp,
                 method:'post',
                 data:{
                     userName:this.refs.userName.value.trim(),

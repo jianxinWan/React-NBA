@@ -98,12 +98,18 @@ class Index extends Component{
     }
     render(){
         let loginWarp = null;
-        if(this.state.loginState){
-            <div></div>
+        if(this.props.userState.userState !== "false"){
+            loginWarp = (
+                <NavLink to="/mydoc">
+                    <div className="mydoc">
+                        <img src="https://mat1.gtimg.com/sports/nba/logo/1602/10.png" width="100%" height="100%" />
+                    </div>
+                </NavLink>
+            )
         }else{
             loginWarp = (
                 <NavLink to="/login">
-                    <span>登录</span>
+                    <span className="toLogin">登录</span>
                 </NavLink>
             )
         }

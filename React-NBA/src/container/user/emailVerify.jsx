@@ -3,6 +3,7 @@ import {Redirect} from 'react-router-dom';
 import Loading from '../../components/loading/loading';
 import msg from '../../components/message';
 import axios from 'axios';
+import URL from './url';
 import './emailVerify.less';
 class EmailVerify extends Component{
     constructor(props){
@@ -19,7 +20,7 @@ class EmailVerify extends Component{
     }
     getSvgCode(){
         axios({
-            url:'http://www.wvue.com.cn:8000/user/getSvgCode',
+            url:URL.getEmailCode,
             method:'get',
             withCredentials: true
         }).then((res)=>{
@@ -36,7 +37,7 @@ class EmailVerify extends Component{
         if(this.state.showCode && this.refs.code.value!=''){
             this.setState({showLoading:true});
             axios({
-                url:'http://www.wvue.com.cn:8000/user/getEmailVerify',
+                url:URL.getEmailVerify,
                 method:'post',
                 data:{
                     email:this.refs.email.value,
