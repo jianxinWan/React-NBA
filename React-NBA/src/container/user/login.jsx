@@ -69,7 +69,6 @@ class Login extends Component{
     login(){
         const isNull = this.refs.num.value.trim() !=='' && this.refs.pass.value.trim() !=='';
         if(this.checkNumFun && isNull){
-            console.log(URL.signIn);
             axios({
                 url:URL.signIn,
                 method:'post',
@@ -81,7 +80,7 @@ class Login extends Component{
             }).then((res)=>{
                 const data = res.data;
                 if(data.result.success){
-                    sessionStorage.setItem('token',`${data.token}`);
+                    localStorage.setItem('token',`${data.token}`);
                     msg.msgOpen({
                         msgType:'success',
                         msg:'登陆成功'

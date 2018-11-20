@@ -4,24 +4,24 @@ import {
 } from '../actions/index';
 
 const userState = (state = {userState:false},action)=>{
-    let sessionStorageUser = sessionStorage.getItem('userState');
+    let localStorageUser = localStorage.getItem('userState');
     switch(action.type){
         case SET_USER:
-            sessionStorage.setItem('userState',action.state);
+            localStorage.setItem('userState',action.state);
             state.userState = action.state;
             return state;
         case GET_USER:
-            if(sessionStorage && typeof sessionStorageUser === "Object"){
+            if(localStorageUser && typeof localStorageUser === "Object"){
                 return state;
             }else{
-                return {userState:sessionStorageUser};
+                return {userState:localStorageUser};
             }
         default:
             //默认返回未登录的状态
-            if(sessionStorage && typeof sessionStorageUser === "Object"){
+            if(localStorageUser && typeof localStorageUser === "Object"){
                 return state;
             }else{
-                return {userState:sessionStorageUser};
+                return {userState:localStorageUser};
             }
     }
 }

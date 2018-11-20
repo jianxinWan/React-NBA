@@ -3,7 +3,7 @@ import {Redirect,NavLink} from 'react-router-dom';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import msg from '../../components/message';
-
+import URL from './url';
 import {setUserState} from '../../actions/index';
 
 import './mydoc.less';
@@ -17,8 +17,8 @@ class Mydoc extends Component{
         this.getUserInfo = this.getUserInfo.bind(this);
     }
     getUserInfo(){
-        const token = sessionStorage.getItem('token');
-        axios.get('http://localhost:8000/user/getUserInfo',{
+        const token = localStorage.getItem('token');
+        axios.get(URL.getUserInfo,{
             headers: {Authorization:`Bearer ${token}`}
         }).then((res)=>{
             //通过redux存储用户登录状态
